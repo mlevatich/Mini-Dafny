@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+  then
+    echo "Usage: /mini-dafny file.imp"
+    exit 1
+fi
+
+chmod +x ./src/vcgen.py
+if [[ $(scala -cp classes VCGen $1 | ./src/vcgen.py | z3 -in) = 'unsat' ]]; then
+  echo "VALID"
+else
+  echo "INVALID"
+fi
