@@ -18,7 +18,7 @@ brew install scala
 brew install z3
 
 # clone the repo
-git clone
+git clone https://github.com/mlevatich/Mini-Dafny.git
 cd Mini-Dafny
 make
 ~~~~
