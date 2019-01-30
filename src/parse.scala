@@ -1,6 +1,9 @@
 import scala.util.parsing.combinator._
 import java.io.FileReader
 
+// EXTENDED FROM A BASE FILE WRITTEN BY RUZICA PISKAC,
+// CPSC 454 PROFESSOR AT YALE UNIVERSITY
+
 object VCGen {
 
     /* Arithmetic expressions. */
@@ -151,33 +154,6 @@ object VCGen {
 
         def assn  : Parser[Assertion] = aimp
 
-/*
-        def assn  : Parser[Assertion] =
-            comp ^^ {
-                ACmp(_)
-            } |
-            ("forall" ~> rep(pvar) <~ ",") ~ assn ^^ {
-                case q ~ a => QUniv(q, a)
-            } |
-            ("exists" ~> rep(pvar) <~ ",") ~ assn ^^ {
-                case q ~ a => QExist(q, a)
-            } |
-            "!" ~> assn ^^ {
-                ANot(_)
-            } |
-            assn ~ ("&&" ~> assn) ^^ {
-                case left ~ right => AAnd(left, right)
-            } |
-            assn ~ ("||" ~> assn) ^^ {
-                case left ~ right => AOr(left, right)
-            } |
-            assn ~ ("==>" ~> assn) ^^ {
-                case left ~ right => AImply(left, right)
-            } |
-            "(" ~> assn <~ ")" ^^ {
-                AParens(_)
-            }
-*/
         /* Parsing for Program. */
         def prog  : Parser[Program] =
             ("program" ~> pvar) ~ rep("pre" ~> assn) ~ rep("post" ~> assn) ~ ("is" ~> block <~ "end") ^^ {
